@@ -1,0 +1,1 @@
+toujour placer dans chaque fichier car le navigateur veut affichier un index (dashbord) et il va le chercher dans chaque dossier est la plage par defaut 

@@ -1,0 +1,192 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  -webkit-overflow-scrolling: touch;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #111;
+  width: 100%;
+  overflow: hidden;
+}
+
+//-------------------------------------------------------------------------login
+
+.ring {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ring i {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  transition: 0.5s;
+}
+.ring i:nth-child(1) {
+  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+  animation: animate 6s linear infinite;
+}
+.ring i:nth-child(2) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+  animation: animate 4s linear infinite;
+}
+.ring i:nth-child(3) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+  animation: animate2 10s linear infinite;
+}
+.ring:hover i {
+  border: 6px solid var(--clr);
+  filter: drop-shadow(0 0 20px var(--clr));
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animate2 {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.login {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.login h2 {
+  font-size: 2em;
+  color: #fff;
+}
+.login .inputBx {
+  position: relative;
+  width: 100%;
+}
+.login .inputBx input {
+  position: relative;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  font-size: 1.2em;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+}
+.login .inputBx input[type="submit"] {
+  width: 100%;
+  background: #0078ff;
+  background: linear-gradient(45deg, #ff357a, #fff172);
+  border: none;
+  cursor: pointer;
+}
+.login .inputBx input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+.login .links {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.login .links a {
+  color: #fff;
+  text-decoration: none;
+}
+//-------------------------------------------------------------------------Librairiew
+//Mr   overflow-x: auto;pour la taille du tableua pour eviter quil ne soit pas trop compresser
+
+#our-programs {
+  /* Styles spécifiques à la page Our Programs */
+  // Supprimer les styles de débordement caché
+  overflow: visible;
+  // Redimensionner les éléments parent
+  min-height: 100vh; 
+  z-index: 1; 
+  // Ajouter des styles de défilement si nécessaire
+  overflow-y: auto; // ou 'scroll' pour forcer toujours le défilement
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column; /* Pour aligner les éléments en colonne */
+  
+}
+
+.our-programs-page{
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column; 
+}
+.ring_librairie{
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ring_librairie i {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%; /* Permet de créer un cercle */
+  background: var(--clr); /* Utilisation de la variable de couleur */
+  inset: 0;
+  border: 2px solid #fff;
+  transition: 0.5s;
+}
+
+/* Positionnement des cercles */
+.ring_librairie i:nth-child(1) { left: 0; }
+.ring_librairie i:nth-child(2) { top: 0; }
+.ring_librairie i:nth-child(3) { right: 0; }
+
+.card:hover {
+  transform: scale(1.1);
+}
+.card {
+  transition: transform 0.5s;
+  background-size: 18rem;
+}
+
+.card-deck .card {
+  margin-bottom: 20px; /* Ajustez cette marge selon vos besoins */
+}
+
+#our-programs .pagination {
+  /* Styles spécifiques à la pagination de la page Our Programs */
+  /* Aaligner la pagination au centre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Ajouter un espacement en haut de la pagination */
+}
+
