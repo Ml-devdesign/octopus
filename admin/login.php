@@ -38,7 +38,7 @@ if (isset($_POST['login']) && isset($_POST['password'])){
 
 </head>
 <body>
-    
+ <div class="body">   
 <!-- L'attribut action du formulaire spécifie l'URL vers laquelle les données du formulaire seront soumises
     lors de la soumission. Assurez-vous que l'URL spécifiée (login.php dans ce cas) est correcte et pointe vers le script PHP 
     qui traite les données du formulaire de connexion. -->
@@ -83,7 +83,7 @@ if (isset($_POST['login']) && isset($_POST['password'])){
         <!--ring div ends here-->
     <!-- <script>alert("Hacked")</script> possibilit� de hacking => ecrit dans le champ nom faille xss cette faille fait simplement un affichage 
     = une injection de javascript   -->
-
+</div>
 </body>
 </html>
 <!-- require_once $_SERVER["DOCUMENT_ROOT"]."/admin/include/connect.php"; pas besoin de try catch permet disoler certaine portion de code et modifier sur un seul fichier la db  -->

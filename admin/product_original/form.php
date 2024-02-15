@@ -55,7 +55,7 @@ if(isset($_GET['id']) && $_GET['id']>0){
 
         <div class="container_librairie">
         <h1>Ajout de Livre</h1>
-        <form action="process.php" method="post" enctype="multipart/form-data">
+        <form action="process.php" method="post"; ?>
             <div class="form-group">
                 <label for="product_name">Titre:</label>
                 <input type="text" id="product_name" name="product_name"  value="<?= htmlspecialchars($row['product_name'])?>">
@@ -99,12 +99,6 @@ if(isset($_GET['id']) && $_GET['id']>0){
 
                 </select>
               </div><br><br>
-
-              <div class="form-group">
-                <label for="product_image">Image:</label>
-                <input type="file" name="product_image" id="product_image">
-              </div>
-          <br><br>
 
             <button type="submit">Ajouter</button>
 

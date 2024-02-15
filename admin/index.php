@@ -18,7 +18,7 @@
     </head>
 
     <body>
-    
+    <div class="body">   
     <div class="ring">
   <i style="--clr:#2e00ff;"></i>
   <i style="--clr:#ff0057;"></i>
@@ -43,5 +43,6 @@
         <!--ring div ends here-->
 
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>  
+</div>
     </body>
 </html>
