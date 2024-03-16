@@ -19,3 +19,4 @@ if(isset($_GET['id']) && $_GET['id']){
     $stmt->execute(); //tout ce qui a etait vue plus haut se retrouve dans le dernier stmtProduct est executé puis 
 }
 header('Location:index.php');
+//A voir des boucle pour les droit des types d'utilisateur pour la securite eviter les faille afin d'eviter la suppresion d'un element d'un profile etc faille Csrf 

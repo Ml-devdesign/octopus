@@ -28,7 +28,7 @@
         <h2>Librairie</h2> 
 
         <div class="inputBx">
-            <a href="product/">
+            <a href="product_requete/">
                 <input type="submit" value="Gestion des bandes dessinées">
             </a>
             </div>

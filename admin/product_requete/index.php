@@ -2,9 +2,9 @@
 // Inclusion des fichiers de protection et de connexion à la base de données
 include $_SERVER["DOCUMENT_ROOT"] . "/admin/include/protect.php";
 require_once $_SERVER["DOCUMENT_ROOT"]. "/admin/include/connect.php";
-
+// error_reporting(E_ALL);//ini_set('display_errors', 1);  //au début de votre script PHP pour afficher les erreurs qui pourraient survenir.
 // Définition du nombre d'éléments à afficher par page
-$nbParPage = 14;
+$nbParPage = 16;
 
 // Récupération du numéro de la page à afficher depuis les paramètres GET
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -26,13 +26,28 @@ $total_pages = ceil($total_product / $nbParPage);
 // Calcul de l'offset pour la pagination
 $offset = ($page - 1) * $nbParPage;
 
-// Requête SQL pour récupérer les produits de la page actuelle
-$sqlProducts = 'SELECT * FROM table_product ORDER BY product_id DESC LIMIT :limit OFFSET :offset';
-$stmtProducts = $db->prepare($sqlProducts);
-$stmtProducts->bindValue(':limit', $nbParPage, PDO::PARAM_INT);
-$stmtProducts->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmtProducts->execute();
-$recordset = $stmtProducts->fetchAll();
+// Vérification si le formulaire de recherche a été soumis
+if(isset($_POST['search']) && !empty($_POST['search']) && isset($_POST['type']) && $_POST['type'] === 'nom') {
+    // Construction de la requête de recherche par nom
+    $searchTerm = '%' . $_POST['search'] . '%'; // Ajout des jokers % pour la recherche partielle
+    $sqlProducts = 'SELECT * FROM table_product WHERE product_name LIKE :product_name ORDER BY product_id DESC LIMIT :limit OFFSET :offset';
+    $stmtProducts = $db->prepare($sqlProducts);
+    $stmtProducts->bindValue(':limit', $nbParPage, PDO::PARAM_INT);
+    $stmtProducts->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmtProducts->bindValue(':product_name', $searchTerm, PDO::PARAM_STR);
+    $stmtProducts->execute();
+    $recordset = $stmtProducts->fetchAll();
+} else {
+    // Requête SQL pour récupérer les produits de la page actuelle
+    $sqlProducts = 'SELECT * FROM table_product ORDER BY product_id DESC LIMIT :limit OFFSET :offset';
+    $stmtProducts = $db->prepare($sqlProducts);
+    $stmtProducts->bindValue(':limit', $nbParPage, PDO::PARAM_INT);
+    $stmtProducts->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmtProducts->execute();
+    $recordset = $stmtProducts->fetchAll();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -48,13 +63,13 @@ $recordset = $stmtProducts->fetchAll();
         <a href="#">Accueil</a>
         <a href="#">Produits</a>
         <a href="#">Utilisateurs</a>
-        <a style="float: right;" href="#">Déconnexion</a>
+        <a style="float: right;" href="admin/logout.php">Déconnexion</a>
     </div>
 
     <div class="container_librairie">
         <h1>Gestion des Livres</h1>
         <!-- Formulaire de recherche -->
-        <form action="process.php" method="post">
+        <form action="" method="post">
             <input type="text" name="search" placeholder="Entrez un critère de recherche">
             <select name="type">
                 <option value="type">Type</option>
@@ -62,6 +77,8 @@ $recordset = $stmtProducts->fetchAll();
             </select>
             <button type="submit">Recherche</button>
         </form>
+
+
        
         <div class="my-2"></div> 
 
@@ -70,7 +87,7 @@ $recordset = $stmtProducts->fetchAll();
             <?php foreach($recordset as $row){ ?>
             <div class="card">
                 <?php if($row['product_image'] != ''){ ?>
-                <img src="<?="/upload/product/xs_".($row['product_image']);?>" class="card-img-top" alt="<?= htmlspecialchars($row['product_name']); ?>">
+                <img src="<?="/upload/product/lg_".($row['product_image']);?>" class="card-img-top" alt="<?= htmlspecialchars($row['product_name']); ?>">
                 <?php } ?>
                 <div class="card-body">
                     <h5 class="card-title"><?= htmlspecialchars($row['product_name']); ?></h5>
@@ -102,8 +119,12 @@ $recordset = $stmtProducts->fetchAll();
     <!-- Pagination -->
     <ul class="pagination">
         <?php 
-        // Lien vers la page précédente
+        // Lien vers la première page
+        echo '<li class="page-item"><a class="page-link" href="index.php?page=1">&laquo;&laquo;</a></li>';
+
+       
         $prev_page = max(1, $page - 1);
+         // Lien vers la page précédente
         echo '<li class="page-item"><a class="page-link" href="index.php?page=' . $prev_page . '">&laquo;</a></li>';
 
         // Tranche de pagination
@@ -121,7 +142,10 @@ $recordset = $stmtProducts->fetchAll();
         // Lien vers la page suivante
         $next_page = min($total_pages, $page + 1);
         echo '<li class="page-item"><a class="page-link" href="index.php?page=' . $next_page . '">&raquo;</a></li>';
-        ?>
-    </ul>
+
+        // Lien vers la dernière page
+        echo '<li class="page-item"><a class="page-link" href="index.php?page=' . $total_pages . '">&raquo;&raquo;</a></li>';
+    ?>
+</ul>
 </body>
 </html>

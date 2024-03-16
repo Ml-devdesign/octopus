@@ -2,9 +2,10 @@
 
 <?php 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/admin/include/connect.php";
+
 if (isset($_POST['login']) && isset($_POST['password'])){
     // echo "1";
-    // Si elles existent, on a défini le login et le mot de passe
+    // Si elles existent, on a définit le login et le mot de passe
     $sql = "SELECT * FROM table_admin WHERE admin_login=:login"; // Requête préparée
     $stmt = $db->prepare($sql); // Préparation de la requête
     $stmt->execute([':login' => $_POST["login"]]); // Exécution de la requête
@@ -17,12 +18,12 @@ if (isset($_POST['login']) && isset($_POST['password'])){
             // Vérifie que ce mot de passe correspond à ce login, le mot de passe sera comparé malgré le fait qu'il soit chiffré 
             session_start();
             // Active la variable de session 
-            $_SESSION['user_connected'] = "ok";
-            // Création d'une variable de session 
+            $_SESSION['user_connected'] = "ok";//a la place du ok on va mettre d'autre choses qui pevent etre supperflu pour que la session mais qui permettent de la securisé  
+            // Création d'une variable de session qui seras verifier a chaque navigation la variable de session (le back office) sur chacune des pages/ variable de session / ce proteger des faille xxss / requete preparer faile sql/
             header("Location:/admin/index.php");
             // Redirection vers la page 
             exit();
-        }
+        }//Pour chaque session generer un taken via une requet sql[Token]
     }
 }
 ?>

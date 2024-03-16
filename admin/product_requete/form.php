@@ -54,7 +54,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         <a href="#">Accueil</a>
         <a href="#">Produits</a>
         <a href="#">Utilisateurs</a>
-        <a style="float: right;" href="#">Déconnexion</a>
+        <a style="float: right;" href="logout.php">Déconnexion</a>
     </div>
 
     <div class="container_librairie">
@@ -86,7 +86,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 
             <div class="form-group">
                 <label for="product_name">Titre:</label>
-                <input type="text" id="product_name" name="product_name" value="<?= isset($row['product_name']) ? htmlspecialchars($row['product_name']) : '' ?>">
+                <input enctype="multipart/form-data" type="text" id="product_name" name="product_name" value="<?= isset($row['product_name']) ? htmlspecialchars($row['product_name']) : '' ?>">
             </div><br><br>
 
             <div class="form-group">
@@ -162,7 +162,8 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
     <!-- jQuery -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <!-- Bootstrap JavaScript -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>  
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> 
+    <script src="/admin/app.js"></script> 
 </body>
 </html>
 
